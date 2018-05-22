@@ -23,5 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', vatforms.views.home, name='home'),
     path('vatforms/', include('vatforms.urls')),
-    path('user/', include('accounts.urls'))
+    path('accounts/', include('accounts.urls'))
 ]

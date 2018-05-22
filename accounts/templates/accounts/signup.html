@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h2 class="text-center">Registruotis</h2>
+        <form method="POST" action="{% url 'signup' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" name="username" class="form-control {% if error %}{{'is-invalid'}}{% endif %}" placeholder="Vartotojo vardas">
+                <small class="form-text text-danger">
+                    {% if error %}
+                    {{ error }}
+                    {% endif%}
+                </small>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" class="form-control {% if errornotsamepass %}{{'is-invalid'}}{% endif %}" placeholder="Slaptažodis">
+                <small class="form-text text-danger">
+                    {% if errornotsamepass %}
+                    {{ errornotsamepass }}
+                    {% endif%}
+                </small>
+            </div>
+            <div class="form-group">
+                <input type="password" name="confirm-password" class="form-control {% if errornotsamepass %}{{'is-invalid'}}{% endif %}" placeholder="Pakartoti slaptažodį">
+                <small class="form-text text-danger">
+                    {% if errornotsamepass %}
+                    {{ errornotsamepass }}
+                    {% endif%}
+                </small>
+            </div>
+            <input class="btn btn-outline-dark btn-block" type="submit" value="Registruotis">
+        </form>
+    </div>
+</div>
+
+{% endblock %}
