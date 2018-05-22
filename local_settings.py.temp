@@ -1,0 +1,16 @@
+"""
+Django sensitive data settings for pvm_forma project.
+import to settings.py
+"""
+SECRET_KEY = ''
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
