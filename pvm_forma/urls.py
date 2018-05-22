@@ -15,7 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import include 
+import vatforms.views
+import accounts.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', vatforms.views.home, name='home'),
+    path('vatforms/', include('vatforms.urls')),
+    path('user/', include('accounts.urls'))
 ]
