@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div>
+    <div class="text-center">
+        <h3>PVM Sąskaita faktūra</h3>
+        <h6>Serija {{invoice.series}} Nr.{{invoice.id}}</h6>
+        <h6>{{invoice.date}}</h6>
+    </div>
+    <div class="row">
+        <div class="col-sm-5">
+            <h5>Pardavėjas:</h5>
+            <p><strong>{{invoice.seller}}</strong></p>
+            <hr>
+        </div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-5">
+            <h5>Pirkėjas:</h5>
+            <p><strong>{{invoice.owner.username}}</strong></p>
+            <hr>
+        </div>
+    </div>
+    <div class="py-4">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Eil.nr.</th>
+                    <th>Pavadinimas</th>
+                    <th>Mat.vnt.</th>
+                    <th>Kiekis</th>
+                    <th>Kaina(Be PVM) Eur</th>
+                    <th>Suma(Be PVM) Eur</th>
+                    <th>PVM tarifas(%)</th>
+                    <th>PVM suma Eur</th>
+                    <th>Suma Eur</th>
+                </tr>
+            </thead>
+
+            <tr>
+                <td>1</td>
+                <td>Lorem ipsum</td>
+            </tr>
+
+        </table>
+        <div class="text-right">Suma: </div>
+    </div>
+</div>
+
+{% endblock %}

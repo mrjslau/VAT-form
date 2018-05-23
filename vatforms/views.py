@@ -1,6 +1,6 @@
 """ Module for GET and POST HTTP requests to vatforms app """
 import datetime
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from django.contrib.auth.decorators import login_required
 from .models import VATInvoice
 
@@ -20,7 +20,17 @@ def createinvoice(request):
             vatinvoice.date = datetime.date.today()
             vatinvoice.owner = request.user
             vatinvoice.save()
-            return redirect('home')
+            return redirect('allinvoices')
         return render(request, 'vatforms/create.html',
                       {'error':'Visi laukai privalo būti užpildyti'})
     return render(request, 'vatforms/create.html')
+
+def showinvoice(request, vatinvoice_id):
+    """ Method to show one invoice with details """
+    invoice = get_object_or_404(VATInvoice, pk=vatinvoice_id)
+    return render(request, 'invoices/show.html', {'invoice':invoice})
+
+def allinvoices(request):
+    """ Method to show all invoices """
+    invoices = get_list_or_404(VATInvoice)
+    return render(request, 'invoices/all.html', {'invoices':invoices})

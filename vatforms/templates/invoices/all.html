@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <h3 class="text-center">Jūsų sąskaitos</h3>
+        <ul> 
+            {% for invoice in invoices %}
+            <li>
+                <a href="{% url 'showinvoice' invoice.id %}">{{invoice.series}} Nr. {{invoice.id}} {{invoice.seller}}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% endblock %}
