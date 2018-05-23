@@ -22,11 +22,11 @@ class VATInvoice(models.Model):
     date = models.DateField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    # TODO id series seller
+    # id series seller
     def __str__(self):
         return self.seller
 
-class PurchasesForm(models.Model):
+class PurchasesWriteOffForm(models.Model):
     """ PurchasesForm class - form for accounting with purchases from invoices """
     institution = models.CharField(max_length=100)
     date = models.DateField
