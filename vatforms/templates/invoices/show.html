@@ -37,13 +37,52 @@
                 </tr>
             </thead>
 
+            {% for idx, purchase in invoice.get_enumpurchaseslist %}
             <tr>
-                <td>1</td>
-                <td>Lorem ipsum</td>
+                <td>{{idx}}.</td>
+                <td>{{purchase.productName}}</td>
+                <td>{{purchase.units}}</td>
+                <td>{{purchase.amount}}</td>
+                <td>{{purchase.price}}</td>
+                <td>{{purchase.totalPrice}}</td>
+                <td>21%</td>
+                <td>{{purchase.count_vat}}</td>
+                <td>{{purchase.count_sumwithvat}}</td>
             </tr>
+            {% endfor %} 
 
         </table>
         <div class="text-right">Suma: </div>
+    </div>
+</div>
+
+<div class="row py-5">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <h3 class="text-center">Pridėti pirkinį</h3>
+        <form method="POST" action="{% url 'showinvoice' invoice.id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="col-md-4">
+                    <input type="text" name="productName" class="form-control" placeholder="Pavadinimas">
+                </div>
+                <div class="col-md-2">
+                    <input type="text" name="units" class="form-control" placeholder="Vnt.">
+                </div>
+                <div class="col-md-2">
+                    <input type="text" name="amount" class="form-control" placeholder="Kiekis">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="price" class="form-control" placeholder="Kaina(vnt.)">
+                </div>
+                <!--<div class="col-md-2">
+                    <input type="text" name="total" class="form-control" placeholder="Suma">
+                </div>-->
+                <div class="col-md-1">
+                    <input class="btn btn-outline-dark btn-block" type="submit" value="+">
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 

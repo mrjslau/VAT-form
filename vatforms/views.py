@@ -2,7 +2,7 @@
 import datetime
 from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from django.contrib.auth.decorators import login_required
-from .models import VATInvoice
+from .models import VATInvoice, Purchase
 
 def home(request):
     """ Method to display homepage """
@@ -28,6 +28,23 @@ def createinvoice(request):
 def showinvoice(request, vatinvoice_id):
     """ Method to show one invoice with details """
     invoice = get_object_or_404(VATInvoice, pk=vatinvoice_id)
+
+    if request.method == 'POST':
+        if request.POST['productName'] and request.POST['units'] and request.POST['amount'] and request.POST['price']:
+            purchase = Purchase()
+            purchase.productName = request.POST['productName']
+            purchase.units = request.POST['units']
+            purchase.amount = int(request.POST['amount'])
+            purchase.price = float(request.POST['price'])
+            purchase.totalPrice = float(purchase.price) * purchase.amount
+            purchase.save()
+
+            invoice.purchases.add(purchase)
+            
+            return redirect('allinvoices')
+        return render(request, 'invoices/show.html',
+                      {'error':'Visi laukai privalo būti užpildyti'})
+
     return render(request, 'invoices/show.html', {'invoice':invoice})
 
 def allinvoices(request):
